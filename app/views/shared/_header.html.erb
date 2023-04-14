@@ -10,8 +10,10 @@
     </form>
     <ul class='lists'>
       <% if user_signed_in? %>
-         <li><%= link_to current_user.nickname, class: "user-nickname"%> </li> 
-         <li><%= link_to 'ログアウト', destroy_user_session_path, method: :delete, class: "logout" %> </li>
+         <li><%= image_tag "マイページ.png",  class: "png" %>  
+         </li>
+         <li><%= link_to image_tag("21.svg",  class: "png"), destroy_user_session_path, method: :delete, class: "logout" %> </li>
+         <li><%= link_to image_tag("1.svg", class:"png"), "#",id: "category-lists", class: "category-list" %></li>
       <% else %>
         <li><%= link_to image_tag("3.svg",class: "png") , new_user_session_path%></li>
         <li><%= link_to image_tag("2.svg",  class: "png"), new_user_registration_path %></li>
