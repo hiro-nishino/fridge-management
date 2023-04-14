@@ -1,7 +1,7 @@
 .second-fotter {
   width: 100%;
   height: 200px;
-  background-color: #e2afaf;
+  background-color: #86bd5f;
   display: flex;
   flex-direction: column;
 }
@@ -19,7 +19,8 @@
 }
 
 .second-fotter-logo {
-  width: 1000px;
-  height: 100px;
+  width: 100%;
+  height: 200px;
   margin: 0 auto;
+  align-items: center;
 }

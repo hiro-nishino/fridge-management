@@ -2,13 +2,13 @@
   width: 100%;
   min-width: 800px;
   height: 130px;
-  background-color: #e2afaf;
+  background-color: #86bd5f;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-.second-logo {
-  width: 200px;
-  height: 100px;
+.second-logo{
+  height: 200px;
+
 }

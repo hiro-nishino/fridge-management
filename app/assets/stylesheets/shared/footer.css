@@ -1,9 +1,7 @@
-/* 下部広告部分 */
-/* items/index.htmlの広告cssを所々使いまわしています。 */
+
 
 .ad-footer-contents {
   width: 100vw;
-  background-image: image-url('furima-footer.png');
   background-size: cover;
   background-repeat: no-repeat;
   background-position: top center;
@@ -32,7 +30,7 @@
   width: 100vw;
   padding: 5vh 0;
   color: #FFF;
-  background-color: #272727;
+  background-color: #86bd5f;
   text-align: center;
 }
 
