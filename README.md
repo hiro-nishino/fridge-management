@@ -27,6 +27,12 @@ belongs_to :user
 has_many :recipe_ingredients
 has_many :ingredients, through: :recipe_ingredients
 
+## Category テーブル
+
+| Column | Type   | Options     |
+| ------ | ------ | ----------- |
+| name   | string | null: false |
+
 ## Ingredients テーブル
 
 | Column      | Type    | Options     |

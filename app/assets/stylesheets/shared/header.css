@@ -20,29 +20,29 @@
 }
 
 .fridege-management-icon {
-  width: 300px;
+  width: 90%;
   margin-right: 10px;
   margin-left: 10px;
 }
 
 .search-form {
-  width:500px;
-  height: 5vh;
+  width: 100% ;
+  height: 7vh;
   display: flex;
   margin-bottom: 5px;
 }
 
 .search-form>.input-box {
-  width: 70%;
-  height: 5vh;
+  width: 100%;
+  height: 7vh;
   padding-left: 10px;
 }
 
 .search-button {
-  width: 5vh;
+  width: 7vh;
   border: 0;
   cursor: pointer;
-  background-color: #3ccace;
+  background-color: #ce573c;
   padding: 8px;
   display: flex;
 }
@@ -51,27 +51,18 @@
   width: 100%;
 }
 
-.category-list {
-  text-decoration: none;
-  margin-right: 3vw;
-  color: #333333;
-}
-
-.brand-list {
-  text-decoration: none;
-  color: #333333;
-
-}
 
 .lists {
   display: flex;
   margin-left: 20px;
   justify-content: flex-end;
+  align-items: center;
 }
 
 
 .png{
-  height: 100px;
-  margin-right: 3vw;
+  width: 60%;
+  height: 60%;
+  margin-right: 5%
 } 
 
