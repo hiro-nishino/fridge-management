@@ -3,4 +3,6 @@ class Step < ApplicationRecord
   validates :direction, presence: true
   
   mount_uploader :image, StepImageUploader
+  belongs_to :recipe
+  has_many_attached :images
 end
