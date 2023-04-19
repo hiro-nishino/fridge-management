@@ -7,3 +7,9 @@
 .botom-image{
   width: 100vw;
 }
+.post-btn {
+  width: 120px;
+  bottom: 40px;
+  right: 60px;
+  position: fixed;
+}

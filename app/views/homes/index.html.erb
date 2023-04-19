@@ -1,5 +1,8 @@
-<%= render "shared/header"%>
+<%#= render "shared/header"%>
 <%= image_tag "2.png", class:"top-image" %>
 <%= image_tag "3.png", class:"center-image" %>
 <%= image_tag "4.png", class:"botom-image" %>
+<%= link_to new_recipe_path, class: 'post-btn' do %>
+  <%= image_tag '投稿.svg' , size: '185x185'  %>
+<% end %>
 <%= render "shared/footer"%>

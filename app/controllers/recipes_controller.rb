@@ -14,25 +14,28 @@ class RecipesController < ApplicationController
   end
 
   def create
-    @recipe = Recipe.new(recipe_params)
-
+    @recipe = current_user.recipes.build(recipe_params)
+  
     if @recipe.save
-      redirect_to @recipe, notice: "レシピが正常に作成されました。"
+      attach_step_images(@recipe, params[:recipe][:steps_attributes])
+      flash[:notice] = "レシピが投稿されました。"
+      redirect_to @recipe
     else
-      @recipe.steps.build if @recipe.steps.blank?
-      render :new
+      render 'new'
     end
   end
-
-  def edit
-  end
-
+  
   def update
     if @recipe.update(recipe_params)
-      redirect_to @recipe, notice: "レシピが正常に更新されました。"
+      attach_step_images(@recipe, params[:recipe][:steps_attributes])
+      flash[:notice] = "レシピが更新されました。"
+      redirect_to @recipe
     else
-      render :edit
+      render 'edit'
     end
+  end
+  
+  def edit
   end
 
   def destroy
@@ -41,12 +44,21 @@ class RecipesController < ApplicationController
   end
 
   private
+  
+  def attach_step_images(recipe, steps_attributes)
+    steps_attributes.each do |_, step_attributes|
+      next unless step_attributes[:step_image]
+
+      step = recipe.steps.find(step_attributes[:id])
+      step.step_image.attach(step_attributes[:step_image])
+    end
+  end
 
   def set_recipe
     @recipe = Recipe.find(params[:id])
   end
 
   def recipe_params
-    params.require(:recipe).permit(:title, :content, images: [], steps_attributes: [:id, :description, :image, :_destroy])
+    params.require(:recipe).permit(:title, :content, images: [], steps_attributes: [:id, :description, :step_image, :_destroy])
   end
 end

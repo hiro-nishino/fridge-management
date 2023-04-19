@@ -1,0 +1,67 @@
+<%= form_with model: recipe, local: true do |form| %>
+  <% if recipe.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(recipe.errors.count, "error") %> prohibited this recipe from being saved:</h2>
+
+      <ul>
+      <% recipe.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  
+  <div class="form-group recipe-title">
+    <%= form.label :title, "レシピ名" %>
+    <%= form.text_field :title, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <label for="recipe_content">内容</label>
+    <textarea class="form-control" name="recipe[content]" id="recipe_content"></textarea>
+  </div>
+  <div class="image-preview-container"></div>
+  <div class="form-group">
+  <label for="recipe_images">レシピ画像</label>
+  <input type="file" class="form-control" name="recipe[images][]" id="recipe_images">
+</div>
+
+  <h2>材料</h2>
+  <!-- Main ingredients -->
+  <div class="main-ingredients">
+    <h3>主な材料</h3>
+    <!-- Add your main ingredients input fields here -->
+  </div>
+
+  <!-- Seasonings -->
+  <div class="seasonings">
+    <h3>調味料</h3>
+    <!-- Add your seasonings input fields here -->
+  </div>
+</div>
+
+  <div id="steps-container">
+    <%= form.fields_for :steps do |step_form| %>
+      <div class="form-group">
+        <%= step_form.label :description, "手順" %>
+        <%= step_form.text_area :description, class: "form-control" %>
+      </div>
+
+      <div class="form-group">
+        <%= step_form.label :step_image, "手順画像" %>
+        <%= step_form.file_field :step_image, class: "form-control step-image-upload" %>
+      </div>
+
+      <div class="step-image-preview">
+        <h3 class="section-title">手順画像プレビュー</h3>
+        <div class="step-image-preview-container"></div>
+      </div>
+    <% end %>
+  </div>
+  <button type="button" id="add-step-button" class="btn btn-secondary">手順を追加</button>
+  <button type="button" id="remove-step-button" class="btn btn-danger">手順を削除</button>
+  <div class="actions">
+    <%= form.submit class: "btn btn-primary" %>
+  </div>
+<% end %>

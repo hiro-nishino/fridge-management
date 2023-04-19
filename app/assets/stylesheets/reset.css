@@ -124,3 +124,28 @@ legend {
 }
 /* YUI CSS Detection Stamp */
 #yui3-css-stamp.cssreset { display: none; }
+
+.recipe-form {
+  max-width: 800px;
+  margin: 0 auto;
+ }
+
+  .recipe-title {
+    font-size: 24px;
+    font-weight: bold;
+  }
+
+  .section-title {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    margin-top: 20px;
+  }
+
+  .form-control {
+    margin-bottom: 10px;
+  }
+
+  .submit-button {
+    margin-top: 20px;
+  }
