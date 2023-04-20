@@ -1,90 +1,143 @@
 document.addEventListener("DOMContentLoaded", () => {
-  const stepsContainer = document.getElementById("steps-container");
-  const addStepButton = document.getElementById("add-step-button");
-  const removeStepButton = document.getElementById("remove-step-button");
+  // 材料の追加ボタン
+  const addIngredientButton = document.createElement("button");
+  addIngredientButton.textContent = "材料を追加";
+  addIngredientButton.classList.add("btn", "btn-secondary", "mb-3");
 
-  const recipeImagesInput = document.getElementById("recipe_images");
-  const imagePreviewContainer = document.querySelector(".image-preview-container");
+  const ingredientsDiv = document.getElementById("ingredients");
+  ingredientsDiv.appendChild(addIngredientButton);
 
-  if (recipeImagesInput) {
-    recipeImagesInput.addEventListener("change", (event) => {
-      // Remove existing preview images
-      while (imagePreviewContainer.firstChild) {
-        imagePreviewContainer.removeChild(imagePreviewContainer.firstChild);
-      }
+  addIngredientButton.addEventListener("click", (event) => {
+    event.preventDefault();
 
-      // Preview newly selected images
-      Array.from(event.target.files).forEach((file) => {
-        const image = document.createElement("img");
-        image.src = URL.createObjectURL(file);
-        image.width = 100;
-        image.height = 100;
-        image.classList.add("preview-image");
-        imagePreviewContainer.appendChild(image);
-      });
-    });
-  }
-
-  const setupStepImagePreview = (upload) => {
-    upload.addEventListener("change", (event) => {
-      const stepImagePreviewContainer = event.target.parentElement.nextElementSibling.querySelector(".step-image-preview-container");
-
-      // Remove existing preview images
-      while (stepImagePreviewContainer.firstChild) {
-        stepImagePreviewContainer.removeChild(stepImagePreviewContainer.firstChild);
-      }
-
-      // Preview newly selected images
-      Array.from(event.target.files).forEach((file) => {
-        const image = document.createElement("img");
-        image.src = URL.createObjectURL(file);
-        image.width = 100;
-        image.height = 100;
-        image.classList.add("preview-image");
-        stepImagePreviewContainer.appendChild(image);
-      });
-    });
-  };
-
-  // Add a new step
-  addStepButton.addEventListener("click", () => {
-    const newStep = document.createElement("div");
-    newStep.classList.add("step");
-
-    const stepNumber = stepsContainer.children.length + 1;
-
-    newStep.innerHTML = `
-      <h3>Step ${stepNumber}</h3>
-      <div class="form-group">
-        <label for="recipe_steps_attributes_${stepNumber - 1}_description">手順</label>
-        <textarea class="form-control" name="recipe[steps_attributes][${stepNumber - 1}][description]" id="recipe_steps_attributes_${stepNumber - 1}_description"></textarea>
-      </div>
-      <div class="form-group">
-        <label for="recipe_steps_attributes_${stepNumber - 1}_step_image">手順画像</label>
-        <input type="file" class="form-control step-image-upload" name="recipe[steps_attributes][${stepNumber - 1}][step_image]" id="recipe_steps_attributes_${stepNumber - 1}_step_image">
-      </div>
-      <div class="step-image-preview">
-        <h3 class="section-title">手順画像プレビュー</h3>
-        <div class="step-image-preview-container"></div>
+    const ingredientTemplate = `
+      <div class="row mb-3 ingredient-row">
+        <div class="col">
+          <label>材料</label>
+          <input class="form-control" type="text" name="recipe[recipe_ingredients_attributes][][name]">
+        </div>
+        <div class="col">
+          <label>量</label>
+          <input class="form-control" type="number" name="recipe[recipe_ingredients_attributes][][quantity]">
+        </div>
+        <div class="col">
+          <label>調味料</label>
+          <input class="form-check-input" type="checkbox" name="recipe[recipe_ingredients_attributes][][is_seasoning]">
+        </div>
+        <div class="col">
+          <button class="btn btn-danger remove-ingredient">削除</button>
+        </div>
       </div>
     `;
-
-    stepsContainer.appendChild(newStep);
-
-    // Setup step image preview for the newly added step
-    const newStepImageUpload = newStep.querySelector(".step-image-upload");
-    setupStepImagePreview(newStepImageUpload);
+    ingredientsDiv.insertAdjacentHTML("beforeend", ingredientTemplate);
+    updateRemoveIngredientButton();
   });
 
-  // Remove the last step
-  removeStepButton.addEventListener("click", () => {
-    if (stepsContainer.children.length > 1) {
-      stepsContainer.removeChild(stepsContainer.lastChild);
-    }
-  });
+  // 手順の追加ボタン
+  const addStepButton = document.getElementById("add-step");
 
-  // Setup step image preview for the initial step
-  const initialStepImageUpload = document.querySelector(".step-image-upload");
-  setupStepImagePreview(initialStepImageUpload);
+  if (addStepButton) {
+    addStepButton.addEventListener("click", () => {
+      const steps = document.getElementById("steps");
+      const stepIndex = steps.childElementCount;
+      const step = document.createElement("div");
+
+      step.classList.add("form-group", "step-row");
+      step.id = `step-${stepIndex}`;
+      step.innerHTML = `
+        <label>手順 ${stepIndex + 1}</label>
+        <textarea class="form-control" name="recipe[recipe_steps_attributes][${stepIndex}][content]" rows="3"></textarea>
+        <label class="mt-2">手順画像</label>
+        <input type="file" id="step-image-${stepIndex}" class="step-image form-control" name="recipe[recipe_steps_attributes][${stepIndex}][image]">
+        <br>
+        <img id="preview-step-image-${stepIndex}" class="img-fluid img-thumbnail" style="display:none;" />
+        <br>
+        <button class="btn btn-danger remove-step">削除</button>
+      `;
+
+      steps.appendChild(step);
+      setTimeout(() => {
+        addPreviewListener(stepIndex);
+      }, 0);
+      updateRemoveStepButton();
+    });
+  }
 });
 
+
+// レシピ画像のプレビュー
+function previewRecipeImage(inputImage, previewImage) {
+  inputImage.addEventListener("change", (e) => {
+    const file = e.target.files[0];
+    const reader = new FileReader();
+
+    reader.onloadend = () => {
+      previewImage.src = reader.result;
+    };
+
+    if (file) {
+      reader.readAsDataURL(file);
+      previewImage.style.display = "block";
+    } else {
+      previewImage.src = "";
+      previewImage.style.display = "none";
+    }
+  });
+}
+
+// 手順画像のプレビュー
+function addPreviewListener(stepIndex) {
+  const stepImageInput = document.getElementById(`step-image-${stepIndex}`);
+  const previewStepImage = document.getElementById(`preview-step-image-${stepIndex}`);
+
+  stepImageInput.addEventListener("change", (e) => {
+    const file = e.target.files[0];
+    const reader = new FileReader();
+
+    reader.onloadend = () => {
+      previewStepImage.src = reader.result;
+      previewStepImage.style.display = "block";
+    };
+
+    if (file) {
+      reader.readAsDataURL(file);
+    } else {
+      previewStepImage.style.display = "none";
+    }
+  });
+}
+function updateRemoveIngredientButton() {
+  const removeIngredientButtons = document.querySelectorAll(".remove-ingredient");
+  removeIngredientButtons.forEach((button) => {
+    button.addEventListener("click", (event) => {
+      event.preventDefault();
+      const ingredientRow = button.closest(".ingredient-row");
+      ingredientRow.remove();
+    });
+  });
+}
+
+// 手順の削除ボタンの更新
+function updateRemoveStepButton() {
+  const removeStepButtons = document.querySelectorAll(".remove-step");
+  removeStepButtons.forEach((button) => {
+    button.addEventListener("click", (event) => {
+      event.preventDefault();
+      const stepRow = button.closest(".step-row");
+      stepRow.remove();
+    });
+  });
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  // レシピ画像
+  const recipeInputImage = document.getElementById("recipe_image");
+  const recipePreviewImage = document.getElementById("preview");
+  previewRecipeImage(recipeInputImage, recipePreviewImage);
+
+  // 既存の手順の画像プレビュー
+  const stepImages = document.querySelectorAll(".step-image");
+  stepImages.forEach((stepImage, index) => {
+    addPreviewListener(index);
+  });
+});

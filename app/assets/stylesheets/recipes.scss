@@ -69,3 +69,111 @@ input[type="submit"] {
     margin-top: 20px;
   }
 }
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+h1 {
+  font-size: 2em;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+}
+
+.form-group label {
+  margin-bottom: 5px;
+}
+
+input[type="text"],
+input[type="file"],
+input[type="checkbox"],
+textarea {
+  width: 100%;
+}
+
+input[type="checkbox"] {
+  width: auto;
+}
+
+.actions {
+  display: flex;
+  justify-content: center;
+}
+
+.btn {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: #fff;
+  text-align: center;
+  text-decoration: none;
+  border-radius: 4px;
+}
+
+.btn:hover {
+  background-color: #0056b3;
+  text-decoration: none;
+  color: #fff;
+}
+
+.btn-danger {
+  background-color: #dc3545;
+}
+
+.btn-danger:hover {
+  background-color: #c82333;
+}
+
+.btn-secondary {
+  background-color: #6c757d;
+}
+
+.btn-secondary:hover {
+  background-color: #5a6268;
+}
+.form-check {
+  display: flex;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.form-check-input {
+  width: auto;
+  margin-right: 5px;
+}
+
+.ingredient-form {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.ingredient-form .form-control {
+  flex: 1;
+  margin-right: 10px;
+}
+
+.ingredient-form .form-check {
+  flex: 0 0 auto;
+}
+.form-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  border-radius: 5px;
+  background-color: #ffffff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}

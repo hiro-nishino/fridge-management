@@ -60,6 +60,7 @@ ActiveRecord::Schema.define(version: 2023_04_17_025518) do
     t.string "name", null: false
     t.integer "quantity", null: false
     t.bigint "category_id", null: false
+    t.boolean "is_seasoning", default: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["category_id"], name: "index_ingredients_on_category_id"

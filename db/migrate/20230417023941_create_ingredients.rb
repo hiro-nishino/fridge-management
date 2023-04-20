@@ -4,6 +4,7 @@ class CreateIngredients < ActiveRecord::Migration[6.0]
       t.string   :name,      null: false 
       t.integer     :quantity,      null: false
       t.references :category,   null: false, foreign_key: true
+      t.boolean    :is_seasoning,   default: false
       t.timestamps
     end
   end

@@ -26,6 +26,8 @@ has_one :fridge
 belongs_to :user
 has_many :recipe_ingredients
 has_many :ingredients, through: :recipe_ingredients
+has_many_attached :images
+has_many :steps, dependent: :destroy
 
 ## Category テーブル
 
@@ -35,11 +37,12 @@ has_many :ingredients, through: :recipe_ingredients
 
 ## Ingredients テーブル
 
-| Column      | Type    | Options     |
-| ----------- | ------- | ----------- |
-| name        | string  | null: false |
-| quantity    | integer | null: false |
-| category_id | integer | null: false |
+| Column       | Type    | Options        |
+| ------------ | ------- | -------------- |
+| name         | string  | null: false    |
+| quantity     | integer | null: false    |
+| is_seasoning | boolean | default: false |
+| category_id  | integer | null: false    |
 
 ### Association
 
@@ -84,3 +87,18 @@ has_many :ingredients, through: :fridge_ingredients
 
 belongs_to :fridge
 belongs_to :ingredient
+
+## steps 　テーブル
+
+| Column    | Type       | Options                       |
+| --------- | ---------- | ----------------------------- |
+| recipe_id | references | null: false foreign_key: true |
+| direction | text       | null: false                   |
+
+### Association
+
+belongs_to :recipe
+validates :direction, presence: true
+
+belongs_to :recipe
+has_one_attached :step_images
