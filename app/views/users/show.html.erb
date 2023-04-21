@@ -1,0 +1,23 @@
+<div class="mypage-container">
+  <h1><%= @user.nickname %>さんのマイページ</h1>
+
+  <div class="mypage-menu">
+    <h2>メニュー</h2>
+    <ul>
+      <li><%= link_to "レシピ一覧・編集", user_recipes_path(@user) %></li>
+      <li><%= link_to "冷蔵庫登録・編集", user_fridge_path(@user) %></li>
+      <li><%= link_to "ユーザー情報編集", edit_user_registration_path %></li>
+    </ul>
+  </div>
+
+  <div class="mypage-recipes">
+    <h2>投稿したレシピ</h2>
+    <ul>
+      <% @recipes.each do |recipe| %>
+        <li>
+          <%= link_to recipe.title, recipe_path(recipe) %>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+</div>

@@ -81,6 +81,7 @@ has_many :ingredients, through: :fridge_ingredients
 | ------------- | ---------- | ----------------------------- |
 | recipe_id     | references | null: false foreign_key: true |
 | ingredient_id | references | null: false foreign_key: true |
+| fridge-id     | references | null: false foreign_key: true |
 | quantity      | integer    | null: false                   |
 
 ### Association

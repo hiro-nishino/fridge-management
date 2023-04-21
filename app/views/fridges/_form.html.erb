@@ -1,0 +1,12 @@
+<%= form_with url: fridge_fridge_ingredients_path(@fridge), method: :post, local: true do |form| %>
+  <div id="ingredients-fields">
+    <div class="ingredient-row">
+      <%= form.label :ingredient_name, "材料" %>
+      <%= form.text_field :ingredient_name, name: 'ingredient_name[]' %>
+      <%= form.label :quantity, "数量" %>
+      <%= form.number_field :quantity, name: 'quantity[]' %>
+    </div>
+  </div>
+  <button id="add-ingredient" type="button">材料を追加</button>
+  <%= form.submit "保存" %>
+<% end %>

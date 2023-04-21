@@ -1,0 +1,34 @@
+<%= stylesheet_link_tag 'application', media: 'all' %>
+
+<div class="container">
+  <h1 class="my-4">冷蔵庫の中身</h1>
+  <%= render 'form', fridege: @fridge %>
+
+  <h2 class="my-4">登録済みの材料リスト</h2>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>材料</th>
+        <th>数量</th>
+        <th>操作</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @fridge.ingredients.each do |ingredient| %>
+        <tr>
+          <td><%= ingredient.name %></td>
+          <td><%= ingredient.fridge_ingredients.find_by(fridge_id: @fridge.id).quantity %></td>
+          <td>
+            <%= link_to '削除', fridge_fridge_ingredient_path(@fridge, ingredient.fridge_ingredients.find_by(fridge_id: @fridge.id)), method: :delete, data: { confirm: '本当に削除しますか？' }, class: 'btn btn-danger' %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+
+
+
+
+
+

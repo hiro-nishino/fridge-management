@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_04_17_025518) do
+ActiveRecord::Schema.define(version: 2023_04_21_063855) do
 
   create_table "active_storage_attachments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name", null: false
@@ -45,6 +45,8 @@ ActiveRecord::Schema.define(version: 2023_04_17_025518) do
     t.integer "quantity", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.bigint "fridge_id", null: false
+    t.index ["fridge_id"], name: "index_fridge_ingredients_on_fridge_id"
     t.index ["ingredient_id"], name: "index_fridge_ingredients_on_ingredient_id"
     t.index ["recipe_id"], name: "index_fridge_ingredients_on_recipe_id"
   end
@@ -108,6 +110,7 @@ ActiveRecord::Schema.define(version: 2023_04_17_025518) do
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "fridge_ingredients", "fridges"
   add_foreign_key "fridge_ingredients", "ingredients"
   add_foreign_key "fridge_ingredients", "recipes"
   add_foreign_key "fridges", "users"

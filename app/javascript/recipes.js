@@ -141,3 +141,11 @@ document.addEventListener("DOMContentLoaded", () => {
     addPreviewListener(index);
   });
 });
+document.getElementById("recipe-form").addEventListener("submit", (event) => {
+  const servingSize = document.getElementById("recipe_serving_size").value;
+  const ingredientQuantities = document.querySelectorAll("input[name='recipe[recipe_ingredients_attributes][][quantity]']");
+
+  ingredientQuantities.forEach((ingredientQuantity) => {
+    ingredientQuantity.value = parseFloat(ingredientQuantity.value) / parseFloat(servingSize);
+  });
+});
