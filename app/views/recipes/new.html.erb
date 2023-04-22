@@ -1,3 +1,10 @@
 <h1>新規レシピ投稿</h1>
+<% content_for :stylesheet do %>
+  <style>
+    .form-label {
+      font-weight: bold;
+    }
+  </style>
+<% end %>
 
 <%= render 'form', recipe: @recipe %>
