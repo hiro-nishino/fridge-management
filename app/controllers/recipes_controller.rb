@@ -47,6 +47,22 @@ class RecipesController < ApplicationController
       Tweet.all
     end
   end
+  
+  def made
+    @recipe = Recipe.find(params[:id])
+    fridge = current_user.fridge
+  
+    @recipe.recipe_ingredients.each do |recipe_ingredient|
+      fridge_ingredient = fridge.fridge_ingredients.find_by(ingredient_id: recipe_ingredient.ingredient_id)
+  
+      if fridge_ingredient
+        new_quantity = fridge_ingredient.quantity - recipe_ingredient.quantity
+        fridge_ingredient.update(quantity: new_quantity)
+      end
+    end
+  
+    redirect_to fridge_path(fridge), notice: '冷蔵庫の材料を更新しました。'
+  end
 
   def ensure_correct_user
     redirect_to recipes_path, alert: '権限がありません' unless current_user.id == @recipe.user_id

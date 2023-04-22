@@ -9,6 +9,9 @@ Rails.application.routes.draw do
     resources :recipes, only: [:index]
     resource :fridge, only: [:show]
   end
+  resources :recipes do
+    post 'made', on: :member
+  end
    resources :fridge_ingredients, only: [:index]
    resources :fridges, only: [:show] do
     resources :fridge_ingredients, only: [:create, :destroy]
