@@ -1,30 +1,14 @@
-<% content_for :stylesheet do %>
-  <style>
-    .recipe-card {
-      margin-bottom: 1rem;
-    }
-    .recipe-card img {
-      max-height: 200px;
-      object-fit: cover;
-    }
-  </style>
-<% end %>
-
-<div class="container mt-5">
-  <div class="row">
-    <div class="col-12">
-      <h1>レシピ一覧</h1>
-    </div>
-  </div>
+<%= paginate @recipes %>
+<div class="container">
   <div class="row">
     <% @recipes.each do |recipe| %>
-      <div class="col-md-4 col-sm-6 col-12">
-        <div class="card recipe-card">
-          <%= image_tag recipe.image_url, class: "card-img-top" %>
+      <div class="col-md-4">
+        <div class="card my-3">
+          <img src="<%= recipe.image.url %>" class="card-img-top" alt="...">
           <div class="card-body">
             <h5 class="card-title"><%= recipe.title %></h5>
-            <p class="card-text"><%= truncate(recipe.content, length: 100) %></p>
-            <%= link_to "詳細", recipe_path(recipe), class: "btn btn-primary" %>
+            <p class="card-text"><%= truncate(recipe.description, length: 100) %></p>
+            <%= link_to '詳細', recipe_path(recipe), class: 'btn btn-primary' %>
           </div>
         </div>
       </div>

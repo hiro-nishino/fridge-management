@@ -7,6 +7,7 @@ class RecipesController < ApplicationController
     @recipes = Recipe.all
     @user = User.find(params[:user_id])
     @recipes = @user.recipes
+    @recipes = Recipe.page(params[:page]).per(9)
   end
 
   def new
@@ -47,7 +48,7 @@ class RecipesController < ApplicationController
       Tweet.all
     end
   end
-  
+
   def made
     @recipe = Recipe.find(params[:id])
     fridge = current_user.fridge
@@ -58,6 +59,7 @@ class RecipesController < ApplicationController
       if fridge_ingredient
         new_quantity = fridge_ingredient.quantity - recipe_ingredient.quantity
         fridge_ingredient.update(quantity: new_quantity)
+        redirect_to recipes_path, notice: 'レシピを作りました！'
       end
     end
   

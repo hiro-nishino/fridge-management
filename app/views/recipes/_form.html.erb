@@ -1,8 +1,8 @@
 <%= render "shared/second-header"%>
-<%= form_with model: @recipe, local: true do |form| %>
+<%= form_with url: fridge_fridge_ingredients_path(@fridge.id), method: :post, local: true do |form| %>
   <div class="mb-3">
-    <%= form.label :title, "タイトル" %>
-    <%= form.text_field :title, class: "form-control" %>
+    <%= form.label :title, class: 'form-label' %>
+    <%= form.text_field :title, class: 'form-control' %>
   </div>
   <div class="mb-3">
     <%= form.label :content, "レシピの説明" %>
@@ -56,5 +56,5 @@
     <button type="button" id="add-step" class="btn btn-secondary">手順を追加</button>
   </div>
 
-  <%= form.submit "投稿", class: "btn btn-primary" %>
+  <%= form.submit "投稿", class: 'btn btn-primary mt-3' %>
 <% end %>
