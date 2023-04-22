@@ -10,7 +10,7 @@ Rails.application.routes.draw do
     resource :fridge, only: [:show]
   end
   resources :recipes do
-    post 'made', on: :member
+    post 'made', on: :member, to: 'recipes#made', as: 'recipe_made'
   end
    resources :fridges, only: [:show] do
     resources :fridge_ingredients, only: [:create, :destroy]
