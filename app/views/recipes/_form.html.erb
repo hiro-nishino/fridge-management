@@ -1,5 +1,5 @@
 <%= render "shared/second-header"%>
-<%= form_with(model: recipe, local: true) do |form| %>
+<%= form_with(model: @recipe, local: true) do |form| %>
   <div class="mb-3">
     <%= form.label :title, class: 'form-label' %>
     <%= form.text_field :title, class: 'form-control' %>
@@ -9,9 +9,9 @@
     <%= form.text_area :content, class: "form-control" %>
   </div>
   <!-- 画像投稿 -->
-  <div class="form-group">
+  <div class="form-group"></div>
    <label>レシピ画像</label>
-    <input type="file" id="recipe_image" class="form-control">
+    <%= form.file_field :image, accept: "image/jpeg,image/gif,image/png",id:"recipe_image", class:"form-control" %>
     <br>
     <img id="preview" class="img-fluid img-thumbnail" style="display:none;" />
   </div>
@@ -20,7 +20,7 @@
   <div id="ingredients">
      <%= form.label :serving_size, "何人分" %>
      <%= form.number_field :serving_size, min: 1, required: true %>
-     <%= form.fields_for :recipe_ingredients do |ingredient_form| %>
+    <%= form.fields_for :ingredients do |ingredient_form| %>
       <div class="row mb-3">
         <div class="col">
           <%= ingredient_form.label :name, "材料" %>
@@ -40,14 +40,16 @@
 
   <!-- ステップ投稿 -->
   <div id="steps">
-    <div class="form-group" id="step-0">
-      <label>手順 1</label>
-      <textarea class="form-control" name="recipe[steps_attributes][0][content]" rows="3"></textarea>
-      <label class="mt-2">手順画像</label>
-      <input type="file" id="step-image-0" class="step-image form-control" name="recipe[steps_attributes][0][image]">
-      <br>
-      <img id="preview-step-image-0" class="img-fluid img-thumbnail" style="display:none;" />
-    </div>
+    <%= form.fields_for :steps do |step_form| %>
+      <div class="form-group" id="step-0">
+        <label>手順 1</label>
+        <textarea class="form-control" name="recipe[steps_attributes][0][direction]" rows="3"></textarea>
+        <label class="mt-2">手順画像</label>
+        <%= form.file_field :image, accept: "image/jpeg,image/gif,image/png",id:"step-image-0", class:"step-image form-control" %>
+        <br>
+        <img id="preview-step-image-0" class="img-fluid img-thumbnail" style="display:none;" />
+      </div>
+    <% end %>
   </div>
   
   <div class="mb-3">

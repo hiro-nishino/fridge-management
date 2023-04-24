@@ -22,18 +22,11 @@ class RecipesController < ApplicationController
   def create
     @recipe = Recipe.new(recipe_params)
     @recipe.user_id = current_user.id
-  
+
     if @recipe.save
-      recipe = current_user.recipes.new(recipe_params)
-  
-      if recipe.save
-        redirect_to recipe, flash: { notice: "「#{recipe.title}」のレシピを投稿しました。" }
-      else
-        redirect_to new_recipe_path, flash: {
-          recipe: recipe,
-          error_messages: recipe.errors.full_messages
-        }
-      end
+      redirect_to @recipe, notice: "レシピが投稿されました！"
+    else
+      render :new
     end
   end
 
@@ -41,11 +34,10 @@ class RecipesController < ApplicationController
     @recipe = current_user.recipes.find(params[:id])
   end
 
-  private
   def recipe_params
-    params.require(:recipe).permit(:title, :content, :serving_size, :image,
-                                   recipe_ingredients_attributes: [:id, :name, :quantity, :is_seasoning, :_destroy],
-                                   steps_attributes: [:id, :content, :image, :_destroy])
+    params.require(:recipe).permit(:title, :content, :serving_size,:image,
+                                 ingredients_attributes: [:id, :quantity, :name, :_destroy],
+                                   steps_attributes: [:id, :direction, :image, :_destroy])
   end
 
   def self.search(search)

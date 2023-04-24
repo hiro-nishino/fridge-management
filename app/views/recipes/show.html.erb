@@ -12,8 +12,8 @@
     <div class="col-md-6">
       <h2>材料</h2>
       <ul>
-        <% @recipe.recipe_ingredients.each do |recipe_ingredient| %>
-          <li><%= recipe_ingredient.ingredient.name %> <%= recipe_ingredient.amount %></li>
+        <% @recipe.ingredients.each do |ingredient| %>
+          <li><%= @recipe.ingredient.name %> <%= ingredient.amount %></li>
         <% end %>
       </ul>
     </div>

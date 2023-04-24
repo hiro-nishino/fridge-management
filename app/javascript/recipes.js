@@ -46,7 +46,7 @@ document.addEventListener("DOMContentLoaded", () => {
       step.id = `step-${stepIndex}`;
       step.innerHTML = `
         <label>手順 ${stepIndex + 1}</label>
-        <textarea class="form-control" name="recipe[steps_attributes][${stepIndex}][content]" rows="3"></textarea>
+        <textarea class="form-control" name="recipe[steps_attributes][${stepIndex}][direction]" rows="3"></textarea>
         <label class="mt-2">手順画像</label>
         <input type="file" id="step-image-${stepIndex}" class="step-image form-control" name="recipe[steps_attributes][${stepIndex}][image]">
         <br>
