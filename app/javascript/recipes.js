@@ -41,7 +41,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const steps = document.getElementById("steps");
       const stepIndex = steps.childElementCount;
       const step = document.createElement("div");
-
+    
       step.classList.add("form-group", "step-row");
       step.id = `step-${stepIndex}`;
       step.innerHTML = `
@@ -50,15 +50,15 @@ document.addEventListener("DOMContentLoaded", () => {
         <label class="mt-2">手順画像</label>
         <input type="file" id="step-image-${stepIndex}" class="step-image form-control" name="recipe[steps_attributes][${stepIndex}][image]">
         <br>
-        <img id="preview-step-image-${stepIndex}" class="img-fluid img-thumbnail" style="display:none;" />
+        <img id="preview-step-image-${stepIndex}" class="img-fluid img-thumbnail step-preview-image" style="display:none;" />
         <br>
         <button class="btn btn-danger remove-step">削除</button>
       `;
-
+    
       steps.appendChild(step);
-      setTimeout(() => {
-        addPreviewListener(stepIndex);
-      }, 0);
+    
+      const stepImageInput = document.getElementById(`step-image-${stepIndex}`);
+      addPreviewListener(stepImageInput);
       updateRemoveStepButton();
     });
   }
@@ -86,9 +86,11 @@ function previewRecipeImage(inputImage, previewImage) {
 
 // 手順画像のプレビュー
 function addPreviewListener(stepImage) {
+
   const stepPreviewImage = stepImage.parentNode.querySelector(".step-preview-image");
 
   stepImage.addEventListener("change", (e) => {
+  
     const file = e.target.files[0];
     const reader = new FileReader();
 
