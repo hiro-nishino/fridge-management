@@ -85,26 +85,26 @@ function previewRecipeImage(inputImage, previewImage) {
 }
 
 // 手順画像のプレビュー
-function addPreviewListener(stepObjectId) {
-  const stepImageInput = document.getElementById(`step_${stepObjectId}_image`);
-  const previewStepImage = document.getElementById(`preview-step-image-${stepObjectId}`);
+function addPreviewListener(stepImage) {
+  const stepPreviewImage = stepImage.parentNode.querySelector(".step-preview-image");
 
-  stepImageInput.addEventListener("change", (e) => {
+  stepImage.addEventListener("change", (e) => {
     const file = e.target.files[0];
     const reader = new FileReader();
 
     reader.onloadend = () => {
-      previewStepImage.src = reader.result;
-      previewStepImage.style.display = "block";
+      stepPreviewImage.src = reader.result;
+      stepPreviewImage.style.display = "block";
     };
 
     if (file) {
       reader.readAsDataURL(file);
     } else {
-      previewStepImage.style.display = "none";
+      stepPreviewImage.style.display = "none";
     }
   });
 }
+
 
 function updateRemoveIngredientButton() {
   const removeIngredientButtons = document.querySelectorAll(".remove-ingredient");
@@ -137,8 +137,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // 既存の手順の画像プレビュー
   const stepImages = document.querySelectorAll(".step-image");
-  stepImages.forEach((stepImage, index) => {
-    addPreviewListener(index);
+  stepImages.forEach((stepImage) => {
+    addPreviewListener(stepImage);
   });
 });
 document.getElementById("recipe-form").addEventListener("submit", (event) => {
