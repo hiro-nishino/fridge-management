@@ -11,33 +11,38 @@
     </div>
     <div class="col-md-6">
       <h2>材料</h2>
-      <ul>
-        <% @recipe.ingredients.each do |ingredient| %>
-            <div class="ingredient__ul">
-              <div><%= ingredient.name %></div>
-              <div><%= ingredient.quantity %></div>
-            </div>
+      <p>何人分: <%= @recipe.serving_size %>人</p>
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th>材料名</th>
+            <th>分量</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @recipe.ingredients.each do |ingredient| %>
+            <tr>
+              <td><%= ingredient.name %></td>
+              <td><%= ingredient.quantity %></td>
+            </tr>
           <% end %>
-      </ul>
+        </tbody>
+      </table>
     </div>
   </div>
 
   <section class="step">
-    <div class="cooking-title">作り方</div>
-    <% @recipe.steps.each do |step| %>
-      <div class="step__item">
-        <div class="step__inner">
-          <div class="step__content">
-            <p class="step__number"></p>
-            <p class="step__description"><%= step.direction %></p>
-          </div>
+    <h2 class="cooking-title">作り方</h2>
+    <% @recipe.steps.each_with_index do |step, index| %>
+      <div class="card mb-4">
+        <div class="card-body">
+          <h5 class="card-title">手順 <%= index + 1 %>:</h5>
+          <p class="card-text"><%= step.direction %></p>
           <% if step.image? %>
-            <div class="step__img">
-              <%= image_tag step.image.url %>
-            </div>
+            <%= image_tag step.image.url, class: "card-img-bottom" %>
           <% end %>
         </div>
       </div>
     <% end %>
   </section>
-</main>
+</div>

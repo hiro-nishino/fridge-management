@@ -14,15 +14,15 @@ document.addEventListener("DOMContentLoaded", () => {
       <div class="row mb-3 ingredient-row">
         <div class="col">
           <label>材料</label>
-          <input class="form-control" type="text" name="recipe[recipe_ingredients_attributes][][name]">
+          <input class="form-control" type="text" name="recipe[ingredients_attributes][][name]">
         </div>
         <div class="col">
           <label>量</label>
-          <input class="form-control" type="string" name="recipe[recipe_ingredients_attributes][][quantity]">
+          <input class="form-control" type="string" name="recipe[ingredients_attributes][][quantity]">
         </div>
         <div class="col">
           <label>調味料</label>
-          <input class="form-check-input" type="checkbox" name="recipe[recipe_ingredients_attributes][][is_seasoning]">
+          <input class="form-check-input" type="checkbox" name="recipe[ingredients_attributes][][is_seasoning]">
         </div>
         <div class="col">
           <button class="btn btn-danger remove-ingredient">削除</button>
