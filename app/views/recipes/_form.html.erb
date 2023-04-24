@@ -29,13 +29,11 @@
         <div class="col">
           <%= ingredient_form.label :quantity, "量" %>
           <div class="input-group">
-            <%= ingredient_form.strig_field :quantity, class: "form-control" %>
+            <%= ingredient_form.text_field :quantity, class: "form-control" %>
           </div>
         </div>
-        <div class="col">
-          <%= ingredient_form.label :is_seasoning, "調味料" %>
-          <%= ingredient_form.check_box :is_seasoning, class: "form-check-input" %>
-        </div>
+          <%#= ingredient_form.label :is_seasoning, "調味料" %>
+          <%#= ingredient_form.check_box :is_seasoning, class: "form-check-input" %>
       </div>
     <% end %>
   </div>

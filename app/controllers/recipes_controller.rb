@@ -28,7 +28,7 @@ class RecipesController < ApplicationController
     if @recipe.save
       redirect_to @recipe, notice: 'レシピが投稿されました。'
     else
-      render :new
+      Rails.logger.debug @recipe.errors.inspect
     end
   end
 
@@ -39,7 +39,11 @@ class RecipesController < ApplicationController
   private
 
   def recipe_params
-    params.require(:recipe).permit(:title, :content, :serving_size, recipe_ingredients_attributes: [:id, :name, :quantity, :is_seasoning, :_destroy], recipe_steps_attributes: [:id, :content, :image, :_destroy])
+    params.require(:recipe).permit(
+      :title, :content, :serving_size,
+      recipe_ingredients_attributes: [:id, :name, :quantity, :is_seasoning, :_destroy],
+      steps_attributes: [:id, :content, :image, :_destroy]
+    )
   end
 
   def self.search(search)
