@@ -16,19 +16,24 @@ class RecipesController < ApplicationController
 
 
   def new
-    @recipe = Recipe.new
-    @recipe.steps.build
-    @recipe.ingredients.build
+    @recipe = Recipe.new(flash[:recipe])
   end
 
   def create
     @recipe = Recipe.new(recipe_params)
     @recipe.user_id = current_user.id
-
+  
     if @recipe.save
-      redirect_to @recipe, notice: 'レシピが投稿されました。'
-    else
-      Rails.logger.debug @recipe.errors.inspect
+      recipe = current_user.recipes.new(recipe_params)
+  
+      if recipe.save
+        redirect_to recipe, flash: { notice: "「#{recipe.title}」のレシピを投稿しました。" }
+      else
+        redirect_to new_recipe_path, flash: {
+          recipe: recipe,
+          error_messages: recipe.errors.full_messages
+        }
+      end
     end
   end
 
@@ -37,13 +42,10 @@ class RecipesController < ApplicationController
   end
 
   private
-
   def recipe_params
-    params.require(:recipe).permit(
-      :title, :content, :serving_size,
-      recipe_ingredients_attributes: [:id, :name, :quantity, :is_seasoning, :_destroy],
-      steps_attributes: [:id, :content, :image, :_destroy]
-    )
+    params.require(:recipe).permit(:title, :content, :serving_size, :image,
+                                   recipe_ingredients_attributes: [:id, :name, :quantity, :is_seasoning, :_destroy],
+                                   steps_attributes: [:id, :content, :image, :_destroy])
   end
 
   def self.search(search)
