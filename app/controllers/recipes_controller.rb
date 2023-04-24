@@ -4,11 +4,16 @@ class RecipesController < ApplicationController
   before_action :ensure_correct_user, only: [:edit, :update, :destroy]
 
   def index
-    @recipes = Recipe.all
-    @user = User.find(params[:user_id])
-    @recipes = @user.recipes
-    @recipes = Recipe.page(params[:page]).per(9)
+    @recipe = "レシピ一覧"
+    @recipes = params[:tag_id].present? ? Tag.find(params[:tag_id]).recipes : Recipe
+
+    if user_signed_in?
+      @recipes = @recipes.includes([:user], [:favorites]).page(params[:page]).per(6)
+    else
+      @recipes = @recipes.includes([:user]).page(params[:page]).per(6)
+    end
   end
+
 
   def new
     @recipe = Recipe.new
@@ -34,11 +39,7 @@ class RecipesController < ApplicationController
   private
 
   def recipe_params
-    params.require(:recipe).permit(
-      :title, :content, images: [],
-      steps_attributes: [:id, :direction, :step_images, :_destroy],
-      recipe_ingredients_attributes: [:id, :name, :quantity, :is_seasoning, :_destroy]
-    )
+    params.require(:recipe).permit(:title, :content, :serving_size, recipe_ingredients_attributes: [:id, :name, :quantity, :is_seasoning, :_destroy], recipe_steps_attributes: [:id, :content, :image, :_destroy])
   end
 
   def self.search(search)

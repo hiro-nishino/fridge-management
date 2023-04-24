@@ -60,9 +60,9 @@ group :production do
 end
 
 gem 'devise'
-gem 'mini_magick'
 gem 'image_processing', '~> 1.2'
 gem 'kaminari'
-gem 'carrierwave'
 gem 'bootstrap', '~> 5.0'
 gem 'jquery-rails'
+gem 'carrierwave', '~> 2.0'
+gem 'mini_magick', '~> 4.8'

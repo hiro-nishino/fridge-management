@@ -1,8 +1,59 @@
-<%= render "shared/header"%>
+<header class='top-page-header'>
+  <div class='search-bar-contents'>
+    <%= link_to image_tag("manegement.png", class:"fridege-management-icon"), "" %>
+      <%= form_with(url: recipes_search_path, local: true, method: :get, class: "search-form") do |form| %>
+        <%= form.text_field :keyword, placeholder: "キーワードから探す", class: "input-box" %>
+        <button class="search-button">
+          <%= image_tag "search.png", class:"search-icon" %>
+        </button>
+      <% end %>
+    </form>
+    <ul class='lists'>
+      <% if user_signed_in? %>
+         <li><%= link_to image_tag("マイページ.png",  class: "png") %> 
+         </li>
+         <li><%= link_to image_tag("21.svg",  class: "png"), destroy_user_session_path, method: :delete, class: "logout" %> </li>
+         <li><%= link_to image_tag("1.svg", class:"png"), "#",id: "category-lists", class: "category-list" %></li>
+      <% else %>
+        <li><%= link_to image_tag("3.svg",class: "png") , new_user_session_path%></li>
+        <li><%= link_to image_tag("2.svg",  class: "png"), new_user_registration_path %></li>
+        <li><%= link_to image_tag("1.svg", class:"png"), "#",id: "category-lists", class: "category-list" %></li>
+      <% end %>
+    </ul>
+  </div>
+</header>
 <%= image_tag "2.png", class:"top-image" %>
 <%= image_tag "3.png", class:"center-image" %>
 <%= image_tag "4.png", class:"botom-image" %>
 <%= link_to new_recipe_path, class: 'post-btn' do %>
   <%= image_tag '投稿.svg' , size: '185x185'  %>
 <% end %>
-<%= render "shared/footer"%>
+<div class='footer'>
+  <div class='footer-contents'>
+    <div class='furima-details'>
+      <h2 class='footer-content-head'>FURIDGE-MANAGEMENTについて</h2>
+      <ul>
+        <li><%= link_to '会社概要（運営会社)', "#", class: "footer-link" %></li>
+        <li><%= link_to 'FURIDGE-MANAGEMENTプライバシーポリシー', "#", class: "footer-link" %></li>
+        <li><%= link_to '利用規約', "#", class: "footer-link" %></li>
+        <li><%= link_to 'ポイントに関する特約', "#", class: "footer-link" %></li>
+      </ul>
+    </div>
+    <div class='furima-details'>
+      <h2 class='footer-content-head'>FURIDGE-MANAGEMENTを見る</h2>
+      <ul>
+        <li><%= link_to 'カテゴリー一覧', "#", class: "footer-link" %></li>
+      </ul>
+    </div>
+    <div class='furima-details'>
+      <h2 class='footer-content-head'>FURIDGE-MANAGEMENTについて</h2>
+      <ul>
+        <li><%= link_to 'FURIDGE-MANAGEMENTガイド', "#", class: "footer-link" %></li>
+        <li><%= link_to 'FURIDGE-MANAGEMENTロゴ利用ガイドライン', "#", class: "footer-link" %></li>
+        <li><%= link_to 'お知らせ', "#", class: "footer-link" %></li>
+      </ul>
+    </div>
+  </div>
+  <%#= link_to image_tag("furima-logo-white.png", class:"logo-white"), "#" %>
+  <p>© FURIDGE-MANAGEMENT</p>
+</div>

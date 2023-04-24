@@ -18,7 +18,7 @@ document.addEventListener("DOMContentLoaded", () => {
         </div>
         <div class="col">
           <label>量</label>
-          <input class="form-control" type="number" name="recipe[recipe_ingredients_attributes][][quantity]">
+          <input class="form-control" type="string" name="recipe[recipe_ingredients_attributes][][quantity]">
         </div>
         <div class="col">
           <label>調味料</label>

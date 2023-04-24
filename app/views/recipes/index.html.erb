@@ -1,13 +1,15 @@
-<%= paginate @recipes %>
 <div class="container">
+  <h1 class="text-center my-5">レシピ一覧</h1>
+
   <div class="row">
     <% @recipes.each do |recipe| %>
       <div class="col-md-4">
         <div class="card my-3">
-          <img src="<%= recipe.image.url %>" class="card-img-top" alt="...">
+          <% if recipe.image.attached? %>
+            <%= image_tag url_for(recipe.image), class: "card-img-top" %>
+          <% end %>
           <div class="card-body">
             <h5 class="card-title"><%= recipe.title %></h5>
-            <p class="card-text"><%= truncate(recipe.description, length: 100) %></p>
             <%= link_to '詳細', recipe_path(recipe), class: 'btn btn-primary' %>
           </div>
         </div>
