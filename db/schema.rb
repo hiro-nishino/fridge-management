@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_04_24_114041) do
+ActiveRecord::Schema.define(version: 2023_04_24_144557) do
 
   create_table "active_storage_attachments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name", null: false
@@ -61,11 +61,10 @@ ActiveRecord::Schema.define(version: 2023_04_24_114041) do
   create_table "ingredients", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name", null: false
     t.string "quantity", null: false
-    t.bigint "category_id", null: false
     t.boolean "is_seasoning", default: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["category_id"], name: "index_ingredients_on_category_id"
+    t.integer "recipe_id"
   end
 
   create_table "recipe_ingredients", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -120,7 +119,6 @@ ActiveRecord::Schema.define(version: 2023_04_24_114041) do
   add_foreign_key "fridge_ingredients", "ingredients"
   add_foreign_key "fridge_ingredients", "recipes"
   add_foreign_key "fridges", "users"
-  add_foreign_key "ingredients", "categories"
   add_foreign_key "recipe_ingredients", "categories"
   add_foreign_key "recipe_ingredients", "ingredients"
   add_foreign_key "recipes", "users"
