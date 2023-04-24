@@ -41,15 +41,15 @@
   <!-- ステップ投稿 -->
   <div id="steps">
     <%= form.fields_for :steps do |step_form| %>
-      <div class="form-group" id="step-0">
-        <label>手順 1</label>
-        <textarea class="form-control" name="recipe[steps_attributes][0][direction]" rows="3"></textarea>
-        <label class="mt-2">手順画像</label>
-        <%= form.file_field :image, accept: "image/jpeg,image/gif,image/png",id:"step-image-0", class:"step-image form-control" %>
+      <div class="form-group step-form" data-object-id="<%= step_form.object.object_id %>">
+        <%= step_form.label :direction, "手順 #{step_form.index + 1}" %>
+        <%= step_form.text_area :direction, class: "form-control", rows: "3" %>
+        <%= step_form.label :image, "手順画像" %>
+        <%= step_form.file_field :image, accept: "image/jpeg,image/gif,image/png", id: "step_#{step_form.object.object_id}_image", class:"step-image form-control" %>
         <br>
-        <img id="preview-step-image-0" class="img-fluid img-thumbnail" style="display:none;" />
+        <img id="preview-step-image-<%= step_form.object.object_id %>" class="img-fluid img-thumbnail" style="display:none;" />
       </div>
-    <% end %>
+   <% end %>
   </div>
   
   <div class="mb-3">

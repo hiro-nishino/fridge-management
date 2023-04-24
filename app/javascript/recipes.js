@@ -64,7 +64,6 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 });
 
-
 // レシピ画像のプレビュー
 function previewRecipeImage(inputImage, previewImage) {
   inputImage.addEventListener("change", (e) => {
@@ -86,9 +85,9 @@ function previewRecipeImage(inputImage, previewImage) {
 }
 
 // 手順画像のプレビュー
-function addPreviewListener(stepIndex) {
-  const stepImageInput = document.getElementById(`step-image-${stepIndex}`);
-  const previewStepImage = document.getElementById(`preview-step-image-${stepIndex}`);
+function addPreviewListener(stepObjectId) {
+  const stepImageInput = document.getElementById(`step_${stepObjectId}_image`);
+  const previewStepImage = document.getElementById(`preview-step-image-${stepObjectId}`);
 
   stepImageInput.addEventListener("change", (e) => {
     const file = e.target.files[0];
@@ -106,6 +105,7 @@ function addPreviewListener(stepIndex) {
     }
   });
 }
+
 function updateRemoveIngredientButton() {
   const removeIngredientButtons = document.querySelectorAll(".remove-ingredient");
   removeIngredientButtons.forEach((button) => {
