@@ -11,6 +11,18 @@ require("../recipes")
 require("../preview_image")
 require("../add_step")
 require("../fridge_ingredients")
+import Rails from "@rails/ujs";
+import Turbolinks from "turbolinks";
+import * as ActiveStorage from "@rails/activestorage";
+import "channels";
+import { addIngredientForm } from '../fridge_ingredients.js';
+
+Rails.start();
+Turbolinks.start();
+ActiveStorage.start();
+
+addIngredientForm();
+
 
 // Uncomment to copy all static images under ../images to the output folder and reference
 // them with the image_pack_tag helper in views (e.g <%= image_pack_tag 'rails.png' %>)

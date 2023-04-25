@@ -1,24 +1,28 @@
-document.addEventListener("turbolinks:load", () => {
-  const addButton = document.querySelector("#add-ingredient");
-  if (addButton) {
-    addButton.addEventListener("click", (event) => {
-      event.preventDefault();
-      const formIndex = document.querySelector("#form-index");
-      let currentIndex = parseInt(formIndex.value, 10);
-      const ingredientsWrapper = document.querySelector("#ingredients-wrapper");
+function addIngredientForm() {
+}
+document.addEventListener('turbolinks:load', () => {
+  const addIngredientButton = document.getElementById('add-ingredient-button');
+  const ingredientList = document.getElementById('ingredient-list');
 
-      const newIngredient = document.createElement("div");
-      newIngredient.innerHTML = `
-        <label for="fridge_fridge_ingredients_attributes_${currentIndex}_name">食材名:</label>
-        <input type="text" name="name[]" id="fridge_fridge_ingredients_attributes_${currentIndex}_name" />
-        <label for="fridge_fridge_ingredients_attributes_${currentIndex}_quantity">数量:</label>
-        <input type="number" name="quantity[]" id="fridge_fridge_ingredients_attributes_${currentIndex}_quantity" />
-        <label for="fridge_fridge_ingredients_attributes_${currentIndex}_expiration_date">賞味期限:</label>
-        <input type="date" name="expiration_date[]" id="fridge_fridge_ingredients_attributes_${currentIndex}_expiration_date" />
-      `;
-      ingredientsWrapper.appendChild(newIngredient);
-      currentIndex += 1;
-      formIndex.value = currentIndex;
-    });
-  }
+  if (!addIngredientButton || !ingredientList) return;
+
+  addIngredientButton.addEventListener('click', () => {
+    const newIngredient = document.createElement('div');
+    newIngredient.innerHTML = `
+      <div class="form-row">
+        <div class="form-group col-md-4">
+          <input type="text" name="name[]" class="form-control" placeholder="食材名">
+        </div>
+        <div class="form-group col-md-4">
+          <input type="number" name="quantity[]" class="form-control" placeholder="数量">
+        </div>
+        <div class="form-group col-md-4">
+          <input type="date" name="expiration_date[]" class="form-control" placeholder="消費期限">
+        </div>
+      </div>
+    `;
+    ingredientList.appendChild(newIngredient);
+  });
 });
+
+export { addIngredientForm };
