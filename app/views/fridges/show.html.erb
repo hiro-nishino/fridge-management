@@ -2,6 +2,7 @@
 
 <div class="container">
   <h1 class="my-4">冷蔵庫の中身</h1>
+  <%= link_to '冷蔵庫を編集', edit_fridge_path(@fridge) %>
   <%= render 'form', fridege: @fridge %>
 
   <h2 class="my-4">登録済みの材料リスト</h2>

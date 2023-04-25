@@ -1,9 +1,11 @@
-<%= render partial: "fridges/form", locals: { fridge: @fridge } %>
 <%= form_with url: fridge_fridge_ingredients_path(@fridge), method: :post, local: true do |form| %>
   <div id="ingredients-fields">
     <div class="ingredient-row">
-      <%= form.label :ingredient_name, "材料" %>
-      <%= form.text_field :ingredient_name, name: 'ingredient_name[]' %>
+      <%= form.label :name, "食材名" %>
+      <%= form.text_field :name, name: 'name[]' %>
+
+      <%= form.label :expiration_date, "賞味期限" %>
+      <%= form.date_field :expiration_date, name: 'expiration_date[]' %>
       <%= form.label :quantity, "数量" %>
       <%= form.number_field :quantity, name: 'quantity[]' %>
     </div>

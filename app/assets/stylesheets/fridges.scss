@@ -1,3 +1,48 @@
 // Place all the styles related to the Fridges controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+.field {
+  margin-bottom: 1rem;
+}
+
+.field label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 0.3rem;
+}
+
+.field input,
+.field textarea {
+  width: 100%;
+  padding: 0.5rem;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+}
+
+.actions {
+  margin-top: 1rem;
+}
+
+.actions input[type="submit"] {
+  background-color: #3490dc;
+  color: #fff;
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  cursor: pointer;
+  border: none;
+  border-radius: 3px;
+}
+
+.error_explanation {
+  background-color: #f8d7da;
+  padding: 1rem;
+  border: 1px solid #f5c6cb;
+  border-radius: 3px;
+  margin-bottom: 1rem;
+  color: #721c24;
+}
+
+.error_explanation h2 {
+  margin-top: 0;
+  font-size: 1.1rem;
+}

@@ -1,0 +1,33 @@
+<h1>冷蔵庫を編集</h1>
+
+<%= form_with model: @fridge, local: true do |form| %>
+<div id="error_explanation">
+  <% if @fridge.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@fridge.errors.count, "error") %> prohibited this fridge from being saved:</h2>
+
+      <ul>
+        <% @fridge.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :name %>
+    <%= form.text_field :name %>
+  </div>
+
+  <div class="field">
+    <%= form.label :description %>
+    <%= form.text_area :description %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit "更新" %>
+  </div>
+</div>
+<% end %>
+
+<%= link_to '戻る', fridge_path(@fridge) %>

@@ -9,7 +9,7 @@ Rails.application.routes.draw do
      resource :fridge, only: [:show]
    end
    resources :recipes
-  resources :fridges, only: [:show] do
+   resources :fridges, only: [:show, :edit, :update] do
     resources :fridge_ingredients, only: [:create, :destroy]
   end
 end
