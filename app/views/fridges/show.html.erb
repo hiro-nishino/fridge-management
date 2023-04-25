@@ -4,7 +4,7 @@
   <h1 class="my-4">冷蔵庫の中身</h1>
   <%= link_to '冷蔵庫を編集', edit_user_fridge_path(@user, @fridge) %>
   <h3 class="my-4">食材を追加</h3>
-  <%= render 'form', fridege: @fridge %>
+  <%= render 'form', fridge: @fridge %>
 
   <h2 class="my-4">登録済みの材料リスト</h2>
   <table class="table">
@@ -18,11 +18,11 @@
     <tbody>
       <% @fridge.fridge_ingredients.each do |fridge_ingredient| %>
         <tr>
-          <td><%= fridge_ingredient.ingredient.name %></td>
+          <td><%= fridge_ingredient.name %></td>
           <td><%= fridge_ingredient.quantity %></td>
           <td><%= fridge_ingredient.expiration_date %></td>
           <td>
-            <%= link_to '削除', fridge_fridge_ingredient_path(@fridge, fridge_ingredient), method: :delete, data: { confirm: 'この食材を削除してもよろしいでしいですか？' } %>
+            <%= link_to '削除', user_fridge_fridge_ingredient_path(@fridge.user, @fridge, fridge_ingredient), method: :delete, data: { confirm: 'この食材を削除してもよろしいでしいですか？' } %>
           </td>
         </tr>
       <% end %>

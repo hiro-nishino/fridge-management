@@ -1,12 +1,12 @@
-<%= form_with url: user_fridge_fridge_ingredients_path(@user, @fridge), method: :post, local: true, id: "new-ingredient-form" do |form| %>
+<%= form_with url: user_fridge_fridge_ingredients_path(@user, @fridge), method: :post, local: true do |form| %>
   <div id="ingredients-fields">
     <div class="ingredient-row">
       <%= form.label :name, "食材名" %>
       <%= form.text_field :name, name: 'name[]' %>
       <%= form.label :quantity, "数量" %>
-      <%= form.number_field :quantity, name: 'quantity[]' %>
-      <%= form.label :expiration_date, "賞味期限" %>
-      <%= form.date_field :expiration_date, name: 'expiration_date[]' %>
+      <%= form.text_field :quantity, name: 'quantity[]' %>
+      <%= form.label :expiration_date, "賞味期限" %> 
+      <%= form.text_field :expiration_date, name: 'expiration_date[]', type: 'date' %>
     </div>
   </div>
   <%= button_tag '食材を追加', type: 'button', id: 'add-ingredient' %>

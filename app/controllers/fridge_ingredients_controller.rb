@@ -2,11 +2,11 @@ class FridgeIngredientsController < ApplicationController
   before_action :set_fridge, only: [:create, :destroy]
 
   def create
-    if params[:name].present?
-      params[:name].each_with_index do |name, index|
-        ingredient = Ingredient.find_or_create_by(name: name)
-       @fridge.fridge_ingredients.create(name: params[:name][index], quantity: params[:quantity][index], expiration_date: params[:expiration_date][index])
-      end
+    @fridge = Fridge.find(params[:fridge_id])
+  
+    params[:name].zip(params[:quantity], params[:expiration_date]).each do |name, quantity, expiration_date|
+      ingredient = Ingredient.find_or_create_by(name: name)
+      @fridge.fridge_ingredients.create(name: name, quantity: quantity, expiration_date: expiration_date, recipe_id: nil)
     end
   
     redirect_to user_fridge_path(@fridge.user, @fridge), notice: '食材が冷蔵庫に追加されました。'

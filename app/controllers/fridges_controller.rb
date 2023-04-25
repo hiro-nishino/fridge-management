@@ -2,6 +2,7 @@ class FridgesController < ApplicationController
   def show
     @user = User.find(params[:user_id])
     @fridge = Fridge.find_by(user_id: @user.id)
+    @ingredient = Ingredient.new
   end
   
   def edit
