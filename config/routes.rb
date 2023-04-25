@@ -4,10 +4,11 @@ Rails.application.routes.draw do
   post 'recipes/:id/cook', to: 'recipes#cook', as: 'cook_recipe'
   get 'recipes/search', to: 'recipes#search'
    resources :recipes
-   resources :users, only: [] do
-     resources :recipes, only: [:index]
+   resources :users, only: [:show] do
+
      resource :fridge, only: [:show]
    end
+   resources :recipes
   resources :fridges, only: [:show] do
     resources :fridge_ingredients, only: [:create, :destroy]
   end

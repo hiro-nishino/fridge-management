@@ -1,2 +1,3 @@
 class FridgeIngredientsController < ApplicationController
+  
 end

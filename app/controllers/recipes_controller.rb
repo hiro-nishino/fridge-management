@@ -4,14 +4,15 @@ class RecipesController < ApplicationController
   before_action :ensure_correct_user, only: [:edit, :update, :destroy]
 
   def index
-    @recipe = "レシピ一覧"
-    @recipes = params[:tag_id].present? ? Tag.find(params[:tag_id]).recipes : Recipe
-
+    @recipes = Recipe.all
     if user_signed_in?
       @recipes = @recipes.includes([:user], [:favorites]).page(params[:page]).per(6)
     else
       @recipes = @recipes.includes([:user]).page(params[:page]).per(6)
     end
+  end
+  
+  def show
   end
 
 
@@ -30,19 +31,21 @@ class RecipesController < ApplicationController
     end
   end
 
+
+  private
   def set_recipe
-    @recipe = current_user.recipes.find(params[:id])
+    @recipe = Recipe.find(params[:id])
   end
 
   def recipe_params
-    params.require(:recipe).permit(:title, :content, :image, :serving_size, ingredients_attributes: [:id, :name, :quantity, :_destroy], steps_attributes: [:id, :direction, :image, :_destroy])
+    params.require(:recipe).permit(:title, :content, :image, :serving_size, :user_id, ingredients_attributes: [:id, :name, :quantity, :_destroy], steps_attributes: [:id, :direction, :image, :_destroy])
   end
 
   def self.search(search)
     if search != ""
-      Tweet.where('text LIKE(?)', "%#{search}%")
+      @recipe.where('text LIKE(?)', "%#{search}%")
     else
-      Tweet.all
+      @recipe.all
     end
   end
 

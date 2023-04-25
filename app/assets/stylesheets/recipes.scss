@@ -99,3 +99,80 @@ body {
   padding-right: 0.75rem;
   padding-left: 0.75rem;
 }
+body {
+  font-family: "Helvetica Neue", Arial, sans-serif;
+  background-color: #f8f9fa;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: bold;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.my-5 {
+  margin-top: 3rem !important;
+  margin-bottom: 3rem !important;
+}
+
+.card {
+  border: none;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.card .card-body {
+  padding: 1.5rem;
+}
+
+.card .card-title {
+  margin-bottom: 1.5rem;
+}
+
+
+
+.card-text {
+  margin-bottom: 1rem;
+}
+
+.table {
+  margin-bottom: 1rem;
+}
+
+table.table-bordered {
+  border-collapse: collapse;
+}
+
+table.table-bordered th,
+table.table-bordered td {
+  border: 1px solid #dee2e6;
+  padding: 0.75rem;
+  text-align: left;
+}
+
+table.table-bordered thead th {
+  background-color: #e9ecef;
+  border-color: #dee2e6;
+}
+
+.step {
+  margin-top: 3rem;
+}
+
+.cooking-title {
+  margin-bottom: 1.5rem;
+}
+.img-fluid{
+width: 500px;
+height: 500px;
+}
+.card-img-bottom{
+width: 300px;
+height: 300px;
+}

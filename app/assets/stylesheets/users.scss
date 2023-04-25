@@ -2,19 +2,69 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 .mypage-container {
-  max-width: 960px;
+  width: 80%;
   margin: 0 auto;
-  padding: 2rem;
+  padding: 40px 0;
+
+  h1 {
+    font-size: 36px;
+    text-align: center;
+    margin-bottom: 50px;
+  }
 }
 
 .mypage-menu {
-  display: flex;
-  justify-content: space-around;
-  margin-bottom: 2rem;
+  h2 {
+    font-size: 28px;
+    margin-bottom: 20px;
+  }
+
+  ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: space-around;
+  }
+
+  li {
+    font-size: 20px;
+    padding: 15px 25px;
+    background-color: #4CAF50;
+    color: white;
+    border-radius: 5px;
+  }
+
+  a {
+    color: white;
+    text-decoration: none;
+  }
 }
 
 .mypage-recipes {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  gap: 1rem;
+  h2 {
+    font-size: 28px;
+    margin-top: 50px;
+    margin-bottom: 20px;
+  }
+
+  ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  li {
+    font-size: 18px;
+    margin-bottom: 10px;
+  }
+
+  a {
+    color: #4CAF50;
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
 }

@@ -38,8 +38,8 @@
         <div class="card-body">
           <h5 class="card-title">手順 <%= index + 1 %>:</h5>
           <p class="card-text"><%= step.direction %></p>
-          <% if step.image? %>
-            <%= image_tag step.image.url, class: "card-img-bottom" %>
+          <% if  step.image.attached?  %>
+            <%= image_tag step.image, class: "card-img-bottom" %>
           <% end %>
         </div>
       </div>
