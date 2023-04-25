@@ -2,34 +2,30 @@
 
 <div class="container">
   <h1 class="my-4">冷蔵庫の中身</h1>
-  <%= link_to '冷蔵庫を編集', edit_fridge_path(@fridge) %>
+  <%= link_to '冷蔵庫を編集', edit_user_fridge_path(@user, @fridge) %>
+  <h3 class="my-4">食材を追加</h3>
   <%= render 'form', fridege: @fridge %>
 
   <h2 class="my-4">登録済みの材料リスト</h2>
   <table class="table">
-    <thead>
-      <tr>
-        <th>材料</th>
-        <th>数量</th>
-        <th>操作</th>
-      </tr>
+   <thead>
+    <tr>
+      <th>食材名</th>
+      <th>数量</th>
+      <th>賞味期限</th>
+    </tr>
     </thead>
     <tbody>
-      <% @fridge.ingredients.each do |ingredient| %>
+      <% @fridge.fridge_ingredients.each do |fridge_ingredient| %>
         <tr>
-          <td><%= ingredient.name %></td>
-          <td><%= ingredient.fridge_ingredients.find_by(fridge_id: @fridge.id).quantity %></td>
+          <td><%= fridge_ingredient.ingredient.name %></td>
+          <td><%= fridge_ingredient.quantity %></td>
+          <td><%= fridge_ingredient.expiration_date %></td>
           <td>
-            <%= link_to '削除', fridge_fridge_ingredient_path(@fridge, ingredient.fridge_ingredients.find_by(fridge_id: @fridge.id)), method: :delete, data: { confirm: '本当に削除しますか？' }, class: 'btn btn-danger' %>
+            <%= link_to '削除', fridge_fridge_ingredient_path(@fridge, fridge_ingredient), method: :delete, data: { confirm: 'この食材を削除してもよろしいでしいですか？' } %>
           </td>
         </tr>
       <% end %>
-    </tbody>
+   </tbody>
   </table>
 </div>
-
-
-
-
-
-

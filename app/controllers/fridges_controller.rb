@@ -1,12 +1,13 @@
 class FridgesController < ApplicationController
   def show
     @user = User.find(params[:user_id])
-    @fridge = @user.fridge
+    @fridge = Fridge.find_by(user_id: @user.id)
   end
-
+  
   def edit
     @fridge = Fridge.find(params[:id])
   end
+
   
   def update
     @fridge = Fridge.find(params[:id])
