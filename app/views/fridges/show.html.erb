@@ -1,31 +1,34 @@
+<%= render "shared/header"%>
 <%= stylesheet_link_tag 'application', media: 'all' %>
-
 <div class="container">
-  <h1 class="my-4">冷蔵庫の中身</h1>
-  <%= link_to '冷蔵庫を編集', edit_user_fridge_path(@user, @fridge) %>
-  <h3 class="my-4">食材を追加</h3>
+  <h1 class="my-4"></h1>
+  <%# = link_to '冷蔵庫を編集', edit_user_fridge_path(@user, @fridge), class: "btn btn-outline-primary mb-3" %>
+  <h3 class="my-4">食材を冷蔵庫に入れる</h3>
   <%= render 'form', fridge: @fridge %>
-
   <h2 class="my-4">登録済みの材料リスト</h2>
-  <table class="table">
-   <thead>
-    <tr>
-      <th>食材名</th>
-      <th>数量</th>
-      <th>賞味期限</th>
-    </tr>
-    </thead>
-    <tbody>
-      <% @fridge.fridge_ingredients.each do |fridge_ingredient| %>
+  <div class="table-responsive">
+    <table class="table">
+      <thead>
         <tr>
-          <td><%= fridge_ingredient.name %></td>
-          <td><%= fridge_ingredient.quantity %></td>
-          <td><%= fridge_ingredient.expiration_date %></td>
-          <td>
-            <%= link_to '削除', user_fridge_fridge_ingredient_path(@fridge.user, @fridge, fridge_ingredient), method: :delete, data: { confirm: 'この食材を削除してもよろしいでしいですか？' } %>
-          </td>
+          <th>食材名</th>
+          <th>数量</th>
+          <th>賞味期限</th>
+          <th>操作</th>
         </tr>
-      <% end %>
-   </tbody>
-  </table>
+      </thead>
+      <tbody>
+        <% @fridge.fridge_ingredients.each do |fridge_ingredient| %>
+          <tr>
+            <td><%= fridge_ingredient.name %></td>
+            <td><%= fridge_ingredient.quantity %></td>
+            <td><%= fridge_ingredient.expiration_date %></td>
+            <td>
+              <%= link_to '削除', user_fridge_fridge_ingredient_path(@fridge.user, @fridge, fridge_ingredient), method: :delete, data: { confirm: 'この食材を削除してもよろしいでしいですか？' }, class: "btn btn-outline-danger btn-sm" %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
 </div>
+<%= render "shared/second-footer"%>

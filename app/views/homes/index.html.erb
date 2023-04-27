@@ -1,27 +1,4 @@
-<header class='top-page-header'>
-  <div class='search-bar-contents'>
-    <%= link_to image_tag("manegement.png", class:"fridege-management-icon"), "" %>
-      <%= form_with(url: recipes_search_path, local: true, method: :get, class: "search-form") do |form| %>
-        <%= form.text_field :keyword, placeholder: "キーワードから探す", class: "input-box" %>
-        <button class="search-button">
-          <%= image_tag "search.png", class:"search-icon" %>
-        </button>
-      <% end %>
-    </form>
-    <ul class='lists'>
-      <% if user_signed_in? %>
-         <li><%= link_to image_tag("マイページ.png",  class: "png"), user_path(id: current_user.id) %> 
-         </li>
-         <li><%= link_to image_tag("21.svg",  class: "png"), destroy_user_session_path, method: :delete, class: "logout" %> </li>
-         <li><%= link_to image_tag("1.svg", class:"png"), recipes_path, id: "category-lists", class: "category-list" %></li>
-      <% else %>
-        <li><%= link_to image_tag("3.svg",class: "png") , new_user_session_path%></li>
-        <li><%= link_to image_tag("2.svg",  class: "png"), new_user_registration_path %></li>
-        <li><%= link_to image_tag("1.svg", class:"png"), "recipes_path",id: "category-lists", class: "category-list" %></li>
-      <% end %>
-    </ul>
-  </div>
-</header>
+<%= render "shared/header"%>
 <%= image_tag "2.png", class:"top-image" %>
 <%= image_tag "3.png", class:"center-image" %>
 <%= image_tag "4.png", class:"botom-image" %>

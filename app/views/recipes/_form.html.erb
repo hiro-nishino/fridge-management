@@ -1,7 +1,6 @@
-<%= render "shared/second-header"%>
 <%= form_with(model: @recipe, local: true, html: { enctype: "multipart/form-data" }) do |form| %>
   <div class="mb-3">
-    <%= form.label :title, class: 'form-label' %>
+    <%= form.label :title, "料理名", class: 'form-label' %>
     <%= form.text_field :title, class: 'form-control' %>
   </div>
   <div class="mb-3">
@@ -14,6 +13,11 @@
     <%= form.file_field :image, accept: "image/jpeg,image/gif,image/png",id:"recipe_image", class:"form-control" %>
     <br>
     <img id="preview" class="img-fluid img-thumbnail" style="display:none;" />
+  </div>
+  <div class="form-group">
+    <%= form.label :tag_names, "タグ" %>
+    <%= form.text_field :tag_names, class: "form-control", value: recipe.tag_names %>
+    <small class="form-text text-muted">タグはカンマ(,)で区切って入力してください</small>
   </div>
 
   <!-- 材料と量の投稿 -->

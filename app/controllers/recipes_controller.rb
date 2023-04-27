@@ -6,7 +6,7 @@ class RecipesController < ApplicationController
   def index
     @recipes = Recipe.all
     if user_signed_in?
-      @recipes = @recipes.includes([:user], [:favorites]).page(params[:page]).per(6)
+      @recipes = @recipes.includes([:user],).page(params[:page]).per(6)
     else
       @recipes = @recipes.includes([:user]).page(params[:page]).per(6)
     end
@@ -15,7 +15,9 @@ class RecipesController < ApplicationController
   def show
   end
 
-
+  def edit
+  end
+  
   def new
     @recipe = Recipe.new(flash[:recipe])
   end
@@ -30,7 +32,17 @@ class RecipesController < ApplicationController
       render :new
     end
   end
-
+  
+  def search
+    @recipes = Recipe.all
+  
+    if params[:search].present?
+      search = params[:search].downcase
+      @recipes = @recipes.joins(:tags).where("LOWER(title) LIKE ? OR LOWER(tags.name) LIKE ?", "%#{search}%", "%#{search}%").distinct
+    end
+  
+    render "index"
+  end
 
   private
   def set_recipe
@@ -38,7 +50,7 @@ class RecipesController < ApplicationController
   end
 
   def recipe_params
-    params.require(:recipe).permit(:title, :content, :image, :serving_size, :user_id, ingredients_attributes: [:id, :name, :quantity, :_destroy], steps_attributes: [:id, :direction, :image, :_destroy])
+    params.require(:recipe).permit(:title, :content, :image, :tag_names, :serving_size, :user_id, ingredients_attributes: [:id, :name, :quantity, :_destroy], steps_attributes: [:id, :direction, :image, :_destroy])
   end
 
   def self.search(search)

@@ -1,3 +1,4 @@
+<%= render "shared/header"%>
 <div class="cooking-title">
   <% if @search.present? %>
     「<%= @search %>」の検索結果
@@ -11,3 +12,4 @@
 <%= paginate @recipes %>
 
 <div class="cancel"><%= link_to 'レシピ一覧に戻る', recipes_path, class:"btn cancel-btn"%></div>
+<%= render "shared/second-footer"%>

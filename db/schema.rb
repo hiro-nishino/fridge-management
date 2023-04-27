@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_04_25_183926) do
+ActiveRecord::Schema.define(version: 2023_04_26_012507) do
 
   create_table "active_storage_attachments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name", null: false
@@ -80,6 +80,15 @@ ActiveRecord::Schema.define(version: 2023_04_25_183926) do
     t.index ["recipe_id"], name: "index_recipe_ingredients_on_recipe_id"
   end
 
+  create_table "recipe_tags", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.bigint "recipe_id", null: false
+    t.bigint "tag_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["recipe_id"], name: "index_recipe_tags_on_recipe_id"
+    t.index ["tag_id"], name: "index_recipe_tags_on_tag_id"
+  end
+
   create_table "recipes", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "title", null: false
     t.text "content", null: false
@@ -98,6 +107,12 @@ ActiveRecord::Schema.define(version: 2023_04_25_183926) do
     t.datetime "updated_at", precision: 6, null: false
     t.string "image"
     t.index ["recipe_id"], name: "index_steps_on_recipe_id"
+  end
+
+  create_table "tags", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -120,6 +135,8 @@ ActiveRecord::Schema.define(version: 2023_04_25_183926) do
   add_foreign_key "fridges", "users"
   add_foreign_key "recipe_ingredients", "categories"
   add_foreign_key "recipe_ingredients", "ingredients"
+  add_foreign_key "recipe_tags", "recipes"
+  add_foreign_key "recipe_tags", "tags"
   add_foreign_key "recipes", "users"
   add_foreign_key "steps", "recipes"
 end

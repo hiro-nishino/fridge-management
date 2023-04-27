@@ -3,7 +3,11 @@ Rails.application.routes.draw do
   root to: "homes#index"
   post 'recipes/:id/cook', to: 'recipes#cook', as: 'cook_recipe'
   get 'recipes/search', to: 'recipes#search'
-  resources :recipes
+  resources :recipes do
+    collection do
+      get :search
+    end
+  end
   resources :users do
     resources :fridges do
       resources :fridge_ingredients

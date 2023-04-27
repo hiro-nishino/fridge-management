@@ -4,24 +4,14 @@
 // that code so it'll be compiled.
 
 require("@rails/ujs").start()
-require("turbolinks").start()
+// require("turbolinks").start()
 require("@rails/activestorage").start()
 require("channels")
+require("../fridge_ingredients.js");
 require("../recipes")
 require("../preview_image")
 require("../add_step")
-require("../fridge_ingredients")
-import Rails from "@rails/ujs";
-import Turbolinks from "turbolinks";
-import * as ActiveStorage from "@rails/activestorage";
-import "channels";
-import { addIngredientForm } from '../fridge_ingredients.js';
 
-Rails.start();
-Turbolinks.start();
-ActiveStorage.start();
-
-addIngredientForm();
 
 
 // Uncomment to copy all static images under ../images to the output folder and reference

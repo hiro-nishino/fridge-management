@@ -1,6 +1,6 @@
+<%= render "shared/header"%>
 <h1>冷蔵庫を編集</h1>
-
-<%= form_with model: @fridge, local: true do |form| %>
+<%= form_with model: @fridge, url: user_fridge_path(current_user, @fridge), local: true do |form| %>
 <div id="error_explanation">
   <% if @fridge.errors.any? %>
     <div id="error_explanation">
@@ -30,4 +30,5 @@
 </div>
 <% end %>
 
-<%= link_to '戻る', fridge_path(@fridge) %>
+<%= link_to '戻る', user_fridge_path(current_user, @fridge) %>
+<%= render "shared/second-footer"%>

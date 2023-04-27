@@ -1,14 +1,26 @@
 <%= form_with url: user_fridge_fridge_ingredients_path(@user, @fridge), method: :post, local: true do |form| %>
   <div id="ingredients-fields">
     <div class="ingredient-row">
-      <%= form.label :name, "食材名" %>
-      <%= form.text_field :name, name: 'name[]' %>
-      <%= form.label :quantity, "数量" %>
-      <%= form.text_field :quantity, name: 'quantity[]' %>
-      <%= form.label :expiration_date, "賞味期限" %> 
-      <%= form.text_field :expiration_date, name: 'expiration_date[]', type: 'date' %>
+      <div class="col-md-4">
+        <div class="form-group">
+          <%= form.label :name, "食材名" %>
+          <%= form.text_field :name, name: 'name[]', class: 'form-control' %>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="form-group">
+          <%= form.label :quantity, "数量" %>
+          <%= form.text_field :quantity, name: 'quantity[]', class: 'form-control' %>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="form-group">
+          <%= form.label :expiration_date, "賞味期限" %> 
+          <%= form.text_field :expiration_date, name: 'expiration_date[]', type: 'date', class: 'form-control' %>
+        </div>
+      </div>
     </div>
   </div>
-  <%= button_tag '食材を追加', type: 'button', id: 'add-ingredient' %>
-  <%= form.submit '冷蔵庫に追加' %>
+  <%= button_tag '食材を追加', type: 'button', id: 'add-ingredient', class: 'btn btn-primary' %>
+  <%= form.submit '冷蔵庫に追加', class: 'btn btn-success' %>
 <% end %>

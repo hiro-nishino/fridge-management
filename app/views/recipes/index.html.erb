@@ -1,19 +1,23 @@
-<div class="container">
-  <h1 class="text-center my-5">レシピ一覧</h1>
-
+<%= render "shared/header"%>
+<div class="container mt-4">
+  <h1 class="text-center mb-4">レシピ一覧</h1>
   <div class="row">
     <% @recipes.each do |recipe| %>
-      <div class="col-md-4">
-        <div class="card my-3">
-          <% if recipe.image.attached? %>
-            <%= image_tag url_for(recipe.image), class: "card-img-top" %>
+      <div class="col-md-4 col-sm-6 mb-4">
+        <div class="card h-100">
+          <%= link_to recipe_path(recipe) do %>
+            <%= image_tag(recipe.image.variant(resize: '300x300'), class: "card-img-top") %>
           <% end %>
           <div class="card-body">
-            <h5 class="card-title"><%= recipe.title %></h5>
-            <%= link_to '詳細', recipe_path(recipe), class: 'btn btn-primary' %>
+            <h5 class="card-title"><%= link_to recipe.title, recipe_path(recipe) %></h5>
+            <p class="card-text"><%= truncate(recipe.content, length: 100) %></p>
+          </div>
+          <div class="card-footer">
+            <small class="text-muted">投稿者: <%= recipe.user.nickname %></small>
           </div>
         </div>
       </div>
     <% end %>
   </div>
 </div>
+<%= render "shared/second-footer" %>

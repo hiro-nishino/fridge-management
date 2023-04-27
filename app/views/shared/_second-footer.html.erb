@@ -1,5 +1,8 @@
-<footer class="bg-light text-center text-lg-start">
-  <div class="container p-3">
+<footer class="second-footer">
+  <div class="contain p-3">
+  <%= link_to(root_path, class: 'logo') do %>
+      <%= image_tag 'footer.svg', class:"logo" %>
+    <% end %>
     <p class="text-muted">&copy; <%= Time.now.year %> Fridge Management. All rights reserved.</p>
   </div>
 </footer>

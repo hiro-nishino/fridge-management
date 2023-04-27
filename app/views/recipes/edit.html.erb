@@ -1,39 +1,67 @@
+<%= render "shared/header" %>
 <div class="container">
   <h1 class="text-center my-5">レシピ編集</h1>
 
+  <div class="cancel"><%= link_to 'レシピを削除', @recipe, method: :delete, data: { confirm: "削除してよろしいですか？" }, class:"btn cancel-btn"%></div>
   <%= form_with(model: @recipe, local: true) do |form| %>
     <div class="form-group">
       <%= form.label :title, 'タイトル' %>
       <%= form.text_field :title, class: 'form-control' %>
     </div>
-
-    <div class="form-group">
-      <%= form.label :description, '手順' %>
-      <%= form.text_area :description, class: 'form-control' %>
+    <div class="mb-3">
+      <%= form.label :content, "レシピの説明" %>
+      <%= form.text_area :content, class: "form-control" %>
     </div>
-
     <% if @recipe.image.attached? %>
       <%= image_tag @recipe.image, class: "img-thumbnail mb-3" %>
     <% end %>
-     <div class="form-group">
+    <div class="form-group">
       <%= form.label :image, '画像' %>
       <%= form.file_field :image, class: 'form-control-file' %>
     </div>
 
-    <div class="form-group">
+    <div class="ingredients">
       <h3>材料</h3>
-      <%= form.fields_for :recipe_ingredients do |recipe_ingredient_form| %>
-        <div class="row mb-3">
-          <div class="col-md-6">
-            <%= recipe_ingredient_form.label :name, '材料名' %>
-            <%= recipe_ingredient_form.text_field :name, class: 'form-control' %>
+      <%= form.label :serving_size, "何人分" %>
+      <%= form.number_field :serving_size, min: 1, required: true %>
+      <% @recipe.ingredients.each do |ingredient| %>
+        <%= form.fields_for :ingredients, ingredient do |ingredient_form| %>
+          <div class="form-row align-items-center mb-3">
+            <div class="col-md-4">
+              <%= ingredient_form.label :name, '材料名' %>
+              <%= ingredient_form.text_field :name, value: ingredient.name, class: 'form-control' %>
+            </div>
+            <div class="col-md-4">
+              <%= ingredient_form.label :quantity, '分量' %>
+              <%= ingredient_form.text_field :quantity, value: ingredient.quantity, class: 'form-control' %>
+            </div>
+            <div class="col-md-2">
+              <%= ingredient_form.label :is_seasoning, "調味料", class: "mr-2" %>
+              <%= ingredient_form.check_box :is_seasoning, class: "form-check-input" %>
+            </div>
+            <div class="col-md-2">
+              <button class="btn btn-danger remove-ingredient">削除</button>
+            </div>
           </div>
-          <div class="col-md-6">
-            <%= recipe_ingredient_form.label :amount, '分量' %>
-            <%= recipe_ingredient_form.text_field :amount, class: 'form-control' %>
-          </div>
-        </div>
+        <% end %>
       <% end %>
+    </div>
+
+    <div class="steps">
+      <% @recipe.steps.each do |step| %>
+        <%= form.fields_for :steps, step do |step_form| %>
+          <div class="form-group step-row">
+            <%= step_form.label :direction, "手順" %>
+            <%= step_form.text_area :direction, value: step.direction, class: "form-control", rows: "3" %>
+            <%= step_form.label :image, "手順画像" %>
+            <%= step_form.file_field :image, accept: "image/jpeg,image/gif,image/png", class: "step-image form-control" %>
+            <br>
+             <img class="img-fluid img-thumbnail step-preview-image" style="display:none;" />
+            <br>
+             <%= link_to "削除", "#", class: "btn btn-danger remove-step" %>
+          </div>
+       <% end %>
+     <% end %>
     </div>
 
     <div class="form-group text-center">
@@ -41,10 +69,4 @@
     </div>
   <% end %>
 </div>
-
-
-
-
-
-
-
+<%= render "shared/second-footer" %>

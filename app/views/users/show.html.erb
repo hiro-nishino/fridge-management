@@ -1,3 +1,4 @@
+<%= render "shared/header"%>
 <div class="mypage-container">
   <h1><%= @user.nickname %>さんのマイページ</h1>
 
@@ -14,9 +15,10 @@
     <ul>
       <% @recipes.each do |recipe| %>
         <li>
-          <%= link_to recipe.title, recipe_path(recipe) %>
+           <%= link_to recipe.title, edit_recipe_path(recipe) %>
         </li>
-      <% end %>
+     <% end %>
     </ul>
   </div>
 </div>
+<%= render "shared/second-footer"%>
