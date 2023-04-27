@@ -34,17 +34,12 @@ class RecipesController < ApplicationController
   end
   
   def search
-    @recipes = Recipe.all
-  
-    if params[:search].present?
-      search = params[:search].downcase
-      @recipes = @recipes.joins(:ingredients, :tags)
-                         .where("LOWER(title) LIKE ? OR LOWER(tags.name) LIKE ? OR LOWER(ingredients.name) LIKE ?",
-                                "%#{search}%", "%#{search}%", "%#{search}%")
-                         .distinct
+    if params[:query].present?
+      search = params[:query].downcase
+      @search_recipes = Recipe.search_by_title_or_tag(search)
+    else
+      @search_recipes = Recipe.all
     end
-  
-    render "index"
   end
 
   private

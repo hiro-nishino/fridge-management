@@ -6,6 +6,12 @@ class Recipe < ApplicationRecord
   accepts_nested_attributes_for :steps, allow_destroy: true
   has_many :recipe_tags, dependent: :destroy
   has_many :tags, through: :recipe_tags
+  scope :search_by_title_or_tag, ->(query) {
+    query = query.downcase
+    joins(:tags)
+    .where("LOWER(recipes.title) LIKE :query OR LOWER(tags.name) LIKE :query", query: "%#{query}%")
+    .distinct
+  }
   has_one_attached :image
 
   validates :title, presence: true

@@ -1,15 +1,23 @@
-<%= render "shared/header"%>
-<div class="cooking-title">
-  <% if @search.present? %>
-    「<%= @search %>」の検索結果
-  <% else %>
-    検索結果
-  <% end %>
+<%= render "shared/header" %>
+<div class="container">
+  <h1 class="text-center mb-4">検索結果</h1>
+  <div class="row">
+    <% @search_recipes.each do |recipe| %>
+      <div class="col-md-4 col-sm-6 mb-4">
+        <div class="card h-100">
+          <%= link_to recipe_path(recipe) do %>
+            <% if recipe.image.attached? %>
+              <%= image_tag recipe.image.variant(resize: "350x200"), class: "card-img-top" %>
+            <% else %>
+              <%= image_tag "default_recipe_image.jpg", class: "card-img-top" %>
+            <% end %>
+            <div class="card-body">
+              <h5 class="card-title"><%= recipe.title %></h5>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
+  </div>
 </div>
-<%= render 'shared/recipe_search' %>
-<%= render 'shared/recipe_list' %>
-
-<%= paginate @recipes %>
-
-<div class="cancel"><%= link_to 'レシピ一覧に戻る', recipes_path, class:"btn cancel-btn"%></div>
-<%= render "shared/second-footer"%>
+<%= render "shared/second-footer" %>
