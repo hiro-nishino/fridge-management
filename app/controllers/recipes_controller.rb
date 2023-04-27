@@ -38,7 +38,10 @@ class RecipesController < ApplicationController
   
     if params[:search].present?
       search = params[:search].downcase
-      @recipes = @recipes.joins(:tags).where("LOWER(title) LIKE ? OR LOWER(tags.name) LIKE ?", "%#{search}%", "%#{search}%").distinct
+      @recipes = @recipes.joins(:ingredients, :tags)
+                         .where("LOWER(title) LIKE ? OR LOWER(tags.name) LIKE ? OR LOWER(ingredients.name) LIKE ?",
+                                "%#{search}%", "%#{search}%", "%#{search}%")
+                         .distinct
     end
   
     render "index"
