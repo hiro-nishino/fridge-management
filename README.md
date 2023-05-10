@@ -1,105 +1,13 @@
-# テーブル設計
+プロジェクトの目的: このアプリケーションを作成する動機や目的を明確に説明します。これは、あなたが特定の問題を解決するためにどのように技術を活用したかを示す良い機会です。
 
-## Users テーブル
+使用技術: このプロジェクトで使用した主要な技術やツールを明示します。Ruby on Rails, MySQL, Active Record などが含まれるでしょう。
 
-| Column             | Type   | Options                  |
-| ------------------ | ------ | ------------------------ |
-| nickname           | string | null: false              |
-| email              | string | null: false unique: true |
-| encrypted_password | string | null: false              |
+主要な機能: 上記の要件定義書にリストされている主要な機能を詳細に説明します。これらの機能がどのように実装され、アプリケーション全体の目標にどのように寄与しているかを説明します。
 
-### Association
+チャレンジと学び: プロジェクトで遭遇した主要な課題や困難を共有し、それらをどのように克服したか、またその過程で何を学んだかを説明します。これは、あなたが問題解決スキルと学習能力を持っていることを示すための重要なセクションです。
 
-has_many :recipes
-has_one :fridge
+デモンストレーション: 可能であれば、アプリケーションのスクリーンショットや動画を使用して、どのように動作するかを視覚的に示します。また、デプロイされたアプリケーションへのリンクを提供すると、見る人が自分で試すことができます。
 
-## Recipes テーブル
+ソースコード: GitHub などの公開リポジトリへのリンクを提供します。これにより、見る人があなたのコーディングスキルとコードの品質を評価できます。
 
-| Column  | Type       | Options                       |
-| ------- | ---------- | ----------------------------- |
-| title   | string     | null: false                   |
-| content | text       | null: false                   |
-| user_id | references | null: false foreign_key: true |
-
-### Association
-
-belongs_to :user
-has_many :recipe_ingredients
-has_many :ingredients, through: :recipe_ingredients
-has_many_attached :images
-has_many :steps, dependent: :destroy
-
-## Category テーブル
-
-| Column | Type   | Options     |
-| ------ | ------ | ----------- |
-| name   | string | null: false |
-
-## Ingredients テーブル
-
-| Column       | Type    | Options        |
-| ------------ | ------- | -------------- |
-| name         | string  | null: false    |
-| quantity     | integer | null: false    |
-| is_seasoning | boolean | default: false |
-| category_id  | integer | null: false    |
-
-### Association
-
-has_many :recipe_ingredients
-has_many :recipes, through: :recipe_ingredients
-has_many :fridge_ingredients
-has_many :fridges, through: :fridge_ingredients
-
-##　 RecipeIngredients 　テーブル
-| Column | Type | Options |
-| ------------ | -----------| -------------- |
-| recipe_id | references | null: false foreign_key: true |
-| ingredient_id | references | null: false foreign_key: true |
-| quantity | integer | null: false |
-
-### Association
-
-belongs_to :recipe
-belongs_to :ingredient
-
-## Fridges テーブル
-
-| Column  | Type       | Options                       |
-| ------- | ---------- | ----------------------------- |
-| user_id | references | null: false foreign_key: true |
-
-### Association
-
-belongs_to :user
-has_many :fridge_ingredients
-has_many :ingredients, through: :fridge_ingredients
-
-## FridgeIngredients テーブル
-
-| Column        | Type       | Options                       |
-| ------------- | ---------- | ----------------------------- |
-| recipe_id     | references | null: false foreign_key: true |
-| ingredient_id | references | null: false foreign_key: true |
-| fridge-id     | references | null: false foreign_key: true |
-| quantity      | integer    | null: false                   |
-
-### Association
-
-belongs_to :fridge
-belongs_to :ingredient
-
-## steps 　テーブル
-
-| Column    | Type       | Options                       |
-| --------- | ---------- | ----------------------------- |
-| recipe_id | references | null: false foreign_key: true |
-| direction | text       | null: false                   |
-
-### Association
-
-belongs_to :recipe
-validates :direction, presence: true
-
-belongs_to :recipe
-has_one_attached :step_images
+改善の余地: 今後の改善点や追加機能についてのアイデアを共有します。これは、あなたがプロジェクトを継続的に改善し続ける意欲があることを示します。
